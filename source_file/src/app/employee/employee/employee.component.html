@@ -1,0 +1,92 @@
+<h6>Multiplication is:{{mul}}</h6>
+<h6>Division is:{{div}}</h6>
+<h2>Employee Management System</h2>
+
+<h3>Accept Employee Details</h3>
+{{employee|json}}
+
+<form #add="ngForm" (ngSubmit)="add.valid&&addEmployee(add)">
+  
+  <div class="mb-3" class="col-6">
+    <label for="empId" class="form-label">Enter Id:</label>
+    <input type="text" [(ngModel)]="employee.empId" #I="ngModel" class="form-control" name="empId" Id="empId" placeholder="Employee Id" required>
+    <p *ngIf="(I.invalid&&I.touched)||(I.invalid && add.submitted)">ID required</p>
+  </div>
+  <br>
+  <div class="mb-3" class="col-6">
+    <label for="empName" class="form-label">Enter Name:</label>
+    <input type="text" [(ngModel)]="employee.empName" #N="ngModel" class="form-control" name="empName" Id="empName" placeholder="Employee Name" required>
+    <p *ngIf="(N.invalid&&N.touched)||(N.invalid && add.submitted)">Name required</p>
+  </div>
+  <br>
+  <div class="mb-3" class="col-6">
+    <label for="empSalary" class="form-label">Enter Salary:</label>
+    <input type="text" [(ngModel)]="employee.empSalary" #S="ngModel" class="form-control" name="empSalary" Id="empSalary" placeholder="Employee Salary" required>
+    <p *ngIf="(S.invalid&&S.touched)||(S.invalid && add.submitted)">Salary required</p>
+  </div>
+  <br>
+  <div class="mb-3" class="col-6">
+    <label for="empAddress" class="form-label">Enter Address:</label>
+    <input type="text" [(ngModel)]="employee.empAddress" ngModel class="form-control" name="empAddress" Id="empAddress" placeholder="emp Address">
+  </div>
+  <br>
+  <div class="mb-3">
+    <input type="submit"  value="{{isEdit==false?'Add Employee':'Update Employee'}}" class="btn btn-primary" >
+   
+  </div>
+ 
+
+</form>
+
+<!-- ngFor -->
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>
+        <input type="checkbox" [(ngModel)]="check" (change)="checkOrUncheckAll()">
+      </th>
+      <th>empId</th>
+      <th>empName</th>
+      <th>empSalary</th>
+      <th>empAddress</th>
+      <th>action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let emp of employees">
+      <!-- <tr [ngStyle]="{'background-color':emp.empSalary>=45000?'red':'cyan'}"> -->
+        <!-- <tr [ngClass]="{'gis':emp.empSalary>=45000}"> -->
+      <!-- <tr *ngIf="emp.empSalary>=45000"> -->
+        <tr>
+          <td>
+            <input type="checkbox" [(ngModel)]="emp.isChecked" (change)="checkOrUncheck()"> <!--doubt-->
+          </td>
+       <td>{{emp.empId}}</td>
+       <td>{{emp.empName}}</td>
+       <td>{{emp.empSalary}}</td>
+       <td>{{emp.empAddress==null?'--':emp.empAddress}}</td>
+       <td>
+        <a [routerLink]="[]" (click)="editEmp(emp)">Edit</a>&nbsp;&nbsp;||&nbsp;&nbsp;
+        <a [routerLink]="[]" (click)="deleteEmployee(emp)">Delete</a>
+       </td>
+      </tr>
+</ng-container>
+  </tbody>
+</table>
+<a [routerLink]="[]" (click)="selector(1)">Tab-1</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+<a [routerLink]="[]" (click)="selector(2)">Tab-2</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+
+<a [routerLink]="[]" (click)="selector(3)">Tab-3</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+<a [routerLink]="[]" (click)="selector(4)">Tab-4</a>
+
+
+<div [ngSwitch]="tabValue" style="min-height:320px;background-color:pink">
+  <div *ngSwitchCase="1">Tab-1 Selected</div> 
+  <div *ngSwitchCase="2">Tab-2 Selected</div>
+  <div *ngSwitchCase="3">Tab-3 Selected</div>
+  <div *ngSwitchCase="4">Tab-4 Selected</div>
+  <div *ngSwitchDefault="">Invalid Tab </div>
+
+
+</div>

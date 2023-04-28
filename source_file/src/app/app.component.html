@@ -1,0 +1,25 @@
+
+<div class="container">
+  <div class="row mb-12">
+    <div class="col-12">
+      <a routerLink="/">Home</a> &nbsp; &nbsp; | &nbsp; &nbsp;
+      <a routerLink="/employee">Employee</a> &nbsp; &nbsp; | &nbsp; &nbsp;
+      <a [routerLink]="['/customer']">Customer</a> &nbsp; &nbsp; | &nbsp; &nbsp;
+      <a [routerLink]="['/posts']">Posts</a>&nbsp; &nbsp; | &nbsp; &nbsp;
+      <a [routerLink]="['/Login']">Login</a>
+    </div>
+  </div>
+  <div class="row mb-3" style="min-height: 550px;">
+    <div class="col-12">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      Designed By : Prem Chand
+    </div>
+  </div>
+</div>
+
+
+

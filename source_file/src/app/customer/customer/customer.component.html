@@ -1,0 +1,65 @@
+<h6>Addition is:{{add}}</h6>
+<h6>Mulplication is:{{mul}}</h6>
+<h3>Customer Management System</h3>
+<div class="col-6">
+  <form  [formGroup]="custFormGroup" (ngSubmit)="addCustomer(custFormGroup)">
+    {{custFormGroup.value|json}}
+    <div class="mb-3">
+      <label for="custId">Customer Id</label>
+       <input type="text" id="custId" class="form-control" formControlName="custId">
+
+       <p *ngIf="(custFormGroup.controls['custId'].invalid&&submmited)||(custFormGroup.controls['custId'].touched&&custFormGroup.controls['custId'].invalid)">Id required</p>
+    </div>
+    <div class="mb-3">
+      <label for="custId">Customer Name</label>
+       <input type="text" id="custName" class="form-control" formControlName="custName">
+       <p *ngIf="(custFormGroup.controls['custName'].invalid&&submmited)||(custFormGroup.controls['custName'].touched&&custFormGroup.controls['custName'].invalid)">Name required</p>
+    </div>
+    <div class="mb-3">
+      <label for="custId">Customer Ammount</label>
+       <input type="text" id="custAmmount" class="form-control" formControlName="custAmmount">
+       <p *ngIf="(custFormGroup.controls['custAmmount'].invalid&&submmited)||(custFormGroup.controls['custAmmount'].touched&&custFormGroup.controls['custAmmount'].invalid)">Ammount required</p>
+    </div>
+    <div class="mb-3">
+      <label for="custId">Customer Address</label>
+       <input type="text" id="custAddress" class="form-control" formControlName="custAddress">
+    
+    </div>
+    <div class="mb-3" >
+      <input type="submit"  value="{{isEdit?'Update Customer':'Add Customer'}}" class="btn btn-primary">
+    </div>
+  </form>
+
+</div>
+<h3>Customer List</h3>
+<table class="table">
+  <thead>
+         <tr>
+          <th>
+            <input type="checkbox" [(ngModel)]="check" (change)="checkAll()">
+          </th>
+          <th>custId</th>
+          <th>custName</th>
+          <th>custAmmount</th>
+          <th>custAddress</th>
+          <th>Action</th>
+         </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let cust of customers">
+      <tr>
+        <td>
+          <input type="checkbox" [(ngModel)]="cust.isChecked" (change)="checkOrUncheck(cust)">
+        </td>
+          <td>{{cust.custId}}</td>
+          <td>{{cust.custName}}</td>
+          <td>{{cust.custAmmount}}</td>
+          <td>{{cust.custAddress==null?'--':cust.custAddress}}</td>
+          <td>
+            <a [routerLink]="[]" (click)="editCust(cust)">Edit</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a [routerLink]="[]" (click)="delectCust(cust)">Delect</a>
+          </td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
